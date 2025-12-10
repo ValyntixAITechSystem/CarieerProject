@@ -17,8 +17,8 @@ const cutomFormat = combine(
   printf(({ timestamp, level, message, label, ...meta }) => {
     const labelStr = label ? `${label}` : "";
 
-    const metaStr = Object.keys(cleanMeta).length
-      ? `\n${JSON.stringify(cleanMeta, null, 2)}`
+    const metaStr = Object.keys(meta).length
+      ? `\n${JSON.stringify(meta, null, 2)}`
       : "";
 
     switch (level) {
