@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon src/index.js",
     "format": "biome format --write",
     "format:check": "biome format",
     "lint": "biome lint --write",

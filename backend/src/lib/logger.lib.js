@@ -9,7 +9,7 @@ const { combine, timestamp, printf } = winston.format;
 const transports = [];
 
 const logDir = path.join(process.cwd(), "logs");
-if (config.NODE_ENV == "production" && !fs.existsSync(logDir)) {
+if (config.NODE_ENV === "production" && !fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
 

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import APIError from "./api-error.lib.js";
 import logger from "./logger.lib.js";
+import APIError from "./api-error.lib.js";
 
 function signToken(payload, secret, expiresIn) {
   return jwt.sign(payload, secret, {
@@ -31,7 +31,7 @@ function verifyToken(token, secret) {
   }
 }
 
-const jwt = {
+const jwtLib = {
   generateAccessToken: (payload) => {
     return signToken(payload, process.env.ACCESS_TOKEN_SECRET, "15m");
   },
@@ -46,4 +46,4 @@ const jwt = {
   },
 };
 
-export default jwt;
+export default jwtLib;
