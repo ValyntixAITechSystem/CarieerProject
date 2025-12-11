@@ -1,7 +1,7 @@
-import winston from "winston";
-import chalk from "chalk";
 import fs from "node:fs";
 import path from "node:path";
+import chalk from "chalk";
+import winston from "winston";
 import config from "../config/env.config.js";
 
 const { combine, timestamp, printf } = winston.format;

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import config from "./env.config.js";
-import logger from "../lib/logger.lib.js";
 import APIError from "../lib/api-error.lib.js";
+import logger from "../lib/logger.lib.js";
+import config from "./env.config.js";
 
 const connectOptions = {
   dbName: config.DB_NAME,

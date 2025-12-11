@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import logger from "./logger.lib.js";
 import APIError from "./api-error.lib.js";
+import logger from "./logger.lib.js";
 
 function signToken(payload, secret, expiresIn) {
   return jwt.sign(payload, secret, {

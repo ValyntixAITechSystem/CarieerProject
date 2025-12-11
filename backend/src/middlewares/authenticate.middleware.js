@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import jwtLib from "../lib/jwt.lib.js";
 import APIError from "../lib/api-error.lib.js";
+import jwtLib from "../lib/jwt.lib.js";
 import logger from "../lib/logger.lib.js";
 
 const authenticateMiddleware = (allowRoles = []) => {
