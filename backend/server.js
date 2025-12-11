@@ -1,16 +1,23 @@
 import { app } from "./app.js";
-import { connectToDB } from "./config/db.config.js";
-import { PORT } from "./config/env.config.js";
+import { connectToDatabase, gracefulShutdown } from "./config/db.config.js";
+import config from "./config/env.config.js";
 import logger from "./lib/logger.lib.js";
 
-export const startServer = async () => {
+const PORT = config.PORT || 5000;
 
-  logger.info("Connecting to the database...",{
-    label: "DB",
-  });
-  connectToDB().then(() => {
-    app.listen(PORT, () => {
-      console.log(`Serving on http://localhost:${PORT}`);
+export const startServer = async () => {
+  try {
+    await connectToDatabase();
+    const server = app.listen(PORT, () => {
+      logger.info(`Server is running in the http://localhost:${PORT}`,{
+        label: "Server",
+      });
     });
-  });
+
+    process.on("SIGINT", async () => gracefulShutdown(server));
+    process.on("SIGTERM", async () => gracefulShutdown(server));
+  } catch (error) {
+    logger.error("Failed to start server", { label: "Server", error });
+    process.exit(1);
+  }
 };

@@ -1,4 +1,4 @@
-import { NODE_ENV } from "../config/env.config.js";
+import config from "../config/env.config.js";
 import { ErrorHandler } from "../utils/ErrorHandler.util.js";
 
 const handleCastError = () => new ErrorHandler("Invalid ID format", 400);
@@ -18,7 +18,7 @@ export const errorMiddleware = (err, req, res, next) => {
   if (err.name === "JsonWebTokenError") error = handleJWTError();
   if (err.name === "TokenExpiredError") error = handleTokenExpiredError();
 
-  if (NODE_ENV === "development") {
+  if (config.NODE_ENV === "development") {
     return res.status(error.statusCode).json({
       success: false,
       message: error.message

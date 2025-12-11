@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-      "format": "biome format --write",
+    "format": "biome format --write",
     "format:check": "biome format",
     "lint": "biome lint --write",
     "check": "biome check",

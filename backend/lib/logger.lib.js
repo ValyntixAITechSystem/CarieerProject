@@ -2,13 +2,14 @@ import winston from "winston";
 import chalk from "chalk";
 import fs from "node:fs";
 import path from "node:path";
+import config from "../config/env.config.js";
 
 const { combine, timestamp, printf } = winston.format;
 
 const transports = [];
 
 const logDir = path.join(process.cwd(), "logs");
-if (process.env.NODE_ENV == "production" && !fs.existsSync(logDir)) {
+if (config.NODE_ENV == "production" && !fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
 
@@ -54,14 +55,14 @@ if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test") {
   transports.push(
     new winston.transports.Console({
       format: cutomFormat,
-      level: process.env.LOG_LEVEL || "info",
+      level: config.LOG_LEVEL || "info",
     })
   );
 } else {
   transports.push(
     new winston.transports.File({
       filename: path.join(logDir, "app.log"),
-      level: "info",
+      level: config.LOG_LEVEL || "info",
     })
   );
 
@@ -80,10 +81,10 @@ if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test") {
 }
 
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || "info",
+  level: config.LOG_LEVEL || "info",
   format: cutomFormat,
   transports,
-  silent: process.env.NODE_ENV === "test",
+  silent: config.NODE_ENV === "test",
 });
 
 export default logger;
